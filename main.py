@@ -9,4 +9,4 @@ cloud.login(client_id, client_secret)
 
 print(cloud.endpoint_list)
 
-help(cloud.api.getDevices)
+help(cloud.api.postDevices)
