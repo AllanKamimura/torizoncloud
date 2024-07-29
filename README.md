@@ -14,9 +14,13 @@ The purpose of this API is to make it easier to the user by:
 Check the [main.py](main.py) script, it should be self-explanatory.
 
 But you simply need to:
-1. Login using your [Torizon Cloud Credentials](https://developer.toradex.com/torizon/torizon-platform/torizon-api#1-create-an-api-client).
+1. Clone the repo
+   1. ```git clone https://github.com/AllanKamimura/torizoncloud.git```
+2.  Install the dependencies.
+    1.  ```pip install -r requirements.txt```
+3. Login using your [Torizon Cloud Credentials](https://developer.toradex.com/torizon/torizon-platform/torizon-api#1-create-an-api-client).
    1. It expects 2 enviroment variables, `TORIZON_CLOUD_CLIENT` and `TORIZON_CLOUD_SECRET`.
-2. Check the helper function for the API endpoints.
+4. Check the helper function for the API endpoints.
 
 ## Examples
 
