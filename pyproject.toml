@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "torizon_cloud"
+version = "0.0.2"
+authors = [
+  { name="Allan Henrique Kamimura", email="allan.kamimura@gmail.com" },
+]
+description = "TorizonCloud Python API is a wrapper around the official Torizon Cloud API."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "requests",
+  "pyyaml"
+]
+
+[project.urls]
+Homepage = "https://github.com/AllanKamimura/torizoncloud"
+Issues = "https://github.com/AllanKamimura/torizoncloud/issues"

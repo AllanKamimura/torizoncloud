@@ -1,5 +1,4 @@
 import json
-import yaml
 import requests as req
 
 class TorizonAPI():
@@ -19,6 +18,7 @@ class TorizonAPI():
         name_placeholder.__doc__  = docstring
         name_placeholder.__name__ = func_name
         name_placeholder.api_endpoint = api_endpoint
+        name_placeholder.valid_params = valid_params
 
         return name_placeholder
 
@@ -29,6 +29,9 @@ class TorizonAPI():
         name_placeholder.__doc__      = docstring
         name_placeholder.__name__     = func_name
         name_placeholder.api_endpoint = api_endpoint
+        name_placeholder.valid_params = valid_params
+        name_placeholder.valid_payload = valid_payload
+
 
         return name_placeholder
 
@@ -57,6 +60,11 @@ class TorizonAPI():
     def post_func(self, api_endpoint, valid_params, valid_payload, accepts_header, **kwargs):
         params  = {k: v for k, v in kwargs.items() if k in valid_params  and v is not None}
         payload = {k: v for k, v in kwargs.items() if k in valid_payload and v is not None}
+        
+        if "data" in payload.keys():
+            payload = payload["data"]
+        else:
+            payload = json.dumps(payload)
 
         api_endpoint = api_endpoint.format(**params)
 
@@ -66,7 +74,7 @@ class TorizonAPI():
         resp = req.post(
             url = self.API + api_endpoint,
             params  = params,
-            data    = json.dumps(payload),
+            data    = payload,
             headers = headers
         )
 

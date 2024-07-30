@@ -46,6 +46,24 @@ cloud.api.getDevices()
 cloud.api.getPackages()
 ```
 
+### Get a list of created fleets
+```python
+cloud.api.getFleets()
+```
+
+### Get Network info about devices
+This is going to return info about ['deviceUuid', 'localIpV4', 'hostname', 'macAddress']
+```python
+cloud.api.getDevicesNetwork()
+```
+
+### Get information about the Packages instaled on a device
+```python
+cloud.api.getDevicesPackagesDeviceuuid(
+    deviceUuid = '558c5227-62fe-4a83-beea-7153d7ae641d' # you can get this from getDevices
+)
+```
+
 ### Create a new device
 ```python
 cloud.api.postDevices(
@@ -55,5 +73,8 @@ cloud.api.postDevices(
 ```
 
 This is going to return the `device_credentials.zip` for the device to connect to your cloud. 
-1. dump the zip content to `/var/sota/import`
-2. `sudo systemctl restart aktualizr`
+1. dump the zip content to `/var/sota/import` in the device
+2. run in the device `sudo systemctl restart aktualizr`
+
+
+### 
