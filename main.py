@@ -7,6 +7,10 @@ client_secret = os.getenv("TORIZON_CLOUD_SECRET")
 cloud = TorizonCloud()
 cloud.login(client_id, client_secret)
 
-print(cloud.endpoint_list)
+print("Endpoints List:")
+for endpoint in cloud.endpoint_list:
+    print(f"\t{endpoint}")
 
-help(cloud.api.postDevices)
+print("\nUse help(cloud.api.ENDPOINT_NAME) to see the endpoint description, accepted parameters and returns")
+
+#help(cloud.api.postDevices)
