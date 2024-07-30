@@ -1,4 +1,4 @@
-from torizon_api import TorizonAPI
+from .torizon_api import TorizonAPI
 
 import requests as req
 import yaml
@@ -171,6 +171,7 @@ class TorizonCloud():
                     parameter_string = ""
 
                     for parameter in endpoint_info["parameters"]:
+                        parameter["name"] = parameter["name"].replace("-", "")
                         valid_parameters.append(parameter["name"])
 
                         required = "required" if parameter["required"] else "optional"
@@ -195,6 +196,14 @@ Parameters:
 Content-Type: {content_type}
 {formatted_payload_info}
 """
+
+                        if content_type == "application/octet-stream":
+                            valid_payload.append("data")
+                            body_string += """
+    with open(file, "r") as f:
+        data = f.read()
+"""
+                            
                     docstring += body_string + "\n\n"
 
                 endpoint_function = endpoint_info["operationId"].replace("-", "_")

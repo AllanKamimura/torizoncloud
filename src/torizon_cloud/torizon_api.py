@@ -42,14 +42,18 @@ class TorizonAPI():
 
         headers = self.header_base.copy()
 
-        resp = req.get(
-            url = self.API + api_endpoint,
-            params = params,
-            headers = headers
-        )
+        try:
+            resp = req.get(
+                url = self.API + api_endpoint,
+                params = params,
+                headers = headers
+            )
 
-        resp.raise_for_status()
-
+            resp.raise_for_status()
+            
+        except Exception as e:
+            print(f"HTTP error occurred: {e}")
+            
         if resp.content:
             if "json" not in headers["accept"]:
                 return resp.content
@@ -60,10 +64,14 @@ class TorizonAPI():
     def post_func(self, api_endpoint, valid_params, valid_payload, accepts_header, **kwargs):
         params  = {k: v for k, v in kwargs.items() if k in valid_params  and v is not None}
         payload = {k: v for k, v in kwargs.items() if k in valid_payload and v is not None}
-        
+
         if "data" in payload.keys():
             payload = payload["data"]
+
         else:
+            if len(valid_payload) == 1:
+                payload = list(payload.values())[0]
+
             payload = json.dumps(payload)
 
         api_endpoint = api_endpoint.format(**params)
@@ -71,14 +79,18 @@ class TorizonAPI():
         headers = self.header_base.copy()
         headers["accept"] = accepts_header
 
-        resp = req.post(
-            url = self.API + api_endpoint,
-            params  = params,
-            data    = payload,
-            headers = headers
-        )
+        try:
+            resp = req.post(
+                url = self.API + api_endpoint,
+                params  = params,
+                data    = payload,
+                headers = headers
+            )
 
-        resp.raise_for_status()
+            resp.raise_for_status()
+
+        except Exception as e:
+            print(f"HTTP error occurred: {e}")
 
         if resp.content:
             if "json" not in headers["accept"]:
