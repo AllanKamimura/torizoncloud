@@ -69,8 +69,10 @@ class TorizonAPI():
             payload = payload["data"]
 
         else:
-            if len(valid_payload) == 1:
-                payload = list(payload.values())[0]
+            # this is a workawound for postFleetsFleetidDevices, which takes an array instead of a json
+            first_value = list(payload.values())[0]
+            if (len(payload.keys()) == 1) and (type(first_value) == list):
+                payload = first_value
 
             payload = json.dumps(payload)
 
