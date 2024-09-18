@@ -4,7 +4,7 @@ import requests as req
 import yaml
 
 class TorizonCloud():
-    def __init__(self, openapi_yaml = "https://app.torizon.io/api/docs/torizon-openapi.yaml"):
+    def __init__(self, openapi_yaml = "https://raw.githubusercontent.com/AllanKamimura/torizoncloud/refs/heads/main/src/torizon_cloud/torizon-openapi.yaml"):
         self.openapi_yaml = openapi_yaml
 
         self.data = self.load_yaml(self.openapi_yaml)
