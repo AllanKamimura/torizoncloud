@@ -256,9 +256,20 @@ Content-Type: {content_type}
                     create_func = TorizonAPI.create_get
 
                 elif htpp_method == "delete":
-                    method = TorizonAPI.get_func
+                    method = TorizonAPI.delete_func
                     create_func = TorizonAPI.create_get
 
+                    setattr(TorizonAPI,
+                            endpoint_function,
+                            create_func(
+                                self.api,
+                                method = method,
+                                api_endpoint = endpoint_path,
+                                valid_params = valid_parameters,
+                                func_name = endpoint_function,
+                                docstring = docstring,
+                                accepts_header = accepts_header))
+                                
                 # Assigning the dynamically created method to the class
 
 

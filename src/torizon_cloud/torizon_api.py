@@ -60,6 +60,32 @@ class TorizonAPI():
 
             else:
                 return resp.json()
+                
+    def delete_func(self, api_endpoint, valid_params, **kwargs):
+        params = {k: v for k, v in kwargs.items() if k in valid_params and v is not None}
+
+        api_endpoint = api_endpoint.format(**params)
+
+        headers = self.header_base.copy()
+
+        try:
+            resp = req.delete(
+                url = self.API + api_endpoint,
+                params = params,
+                headers = headers
+            )
+
+            resp.raise_for_status()
+            
+        except Exception as e:
+            print(f"HTTP error occurred: {e}")
+            
+        if resp.content:
+            if "json" not in headers["accept"]:
+                return resp.content
+
+            else:
+                return resp.json()
 
     def post_func(self, api_endpoint, valid_params, valid_payload, accepts_header, **kwargs):
         params  = {k: v for k, v in kwargs.items() if k in valid_params  and v is not None}
