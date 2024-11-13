@@ -141,3 +141,53 @@ cloud.api.postUpdates(
     # fleets     = ["8b96056e-0607-4e48-a098-e8c182647171"], # the device must have been seen online at least 1 time
 )
 ```
+
+### Delete devices in a list
+
+Please be careful, this operation is irreversible.
+
+```python
+# get the first 50 devices
+devices = cloud.api.getDevices(limit = 50)["values"]
+
+# filter those devices with a simple logic
+deviceUuids = [device["deviceUuid"] for device in devices if (device["deviceName"] != "something" or not device["deviceId"].startswith("verdin"))]
+
+# delete all the devices in the filtered list
+for deviceUuid in deviceUuids:
+    cloud.api.deleteDevicesDeviceuuid(deviceUuid = deviceUuid)
+```
+
+### Delete Fleets
+
+Please be careful, this operation is irreversible.
+
+```python
+# get the first 50 fleets
+fleets = cloud.api.getFleets(limit = 50)["values"]
+
+# filter those fleets with a simple logic
+fleetIds = [fleet["id"] for fleet in fleets if (fleet["name"] != "something")]
+
+# delete all the fleets in the list
+for fleetId in fleetIds:
+    cloud.api.deleteFleetsFleetid(fleetId = fleetId)
+```
+
+### Delete Packages
+
+Please be careful, this operation is irreversible.
+
+```python
+# get the first 50 packages using some filters
+packages = cloud.api.getPackages(
+    limit = 50,
+    packageSource = "targets.json",
+    nameContains = "matheuscastelo"
+    )["values"]
+
+packageIds = [package["packageId"] for package in packages]
+
+for packageId in packageIds:
+    cloud.api.deletePackagesPackageid(packageId = packageId)
+```
