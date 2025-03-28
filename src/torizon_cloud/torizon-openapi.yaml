@@ -3188,5 +3188,12 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
+    Oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://kc.torizon.io/auth/realms/ota-users/protocol/openid-connect/token
+          scopes:
+            profile: Default scope; automatically added and not currently used.
 security:
 - BearerAuth: []
