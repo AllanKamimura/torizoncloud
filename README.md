@@ -191,3 +191,17 @@ packageIds = [package["packageId"] for package in packages]
 for packageId in packageIds:
     cloud.api.deletePackagesPackageid(packageId = packageId)
 ```
+
+### Delete Lockboxes
+
+Please be careful, this operation is irreversible.
+
+```python
+# get lockboxes names and filter it
+lockboxes = cloud.api.getLockboxes()
+
+lockboxesNames = [name for name in lockboxes if "matheuscastelo" in name]
+
+for lockboxesNams in lockboxesNames:
+    cloud.api.deleteLockboxesLockbox_name(lockbox_name = lockboxesNams)
+```
