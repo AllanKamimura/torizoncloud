@@ -27,7 +27,7 @@ class TorizonCloud():
         def format_properties(properties, indent=4):
             formatted_props = []
             for prop, details in properties.items():
-                type_info = details['type']
+                type_info = details.get('type', "null")
                 nullable_info = "optional" if details.get('nullable') else "required"
                 format_info = f"format: {details.get('format', '')}" if 'format' in details else ""
                 enum_info = f"enum: {details['enum']}" if 'enum' in details else ""
